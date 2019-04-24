@@ -1,0 +1,1 @@
+sudo openvpn --daemon --auth-nocache --cd "/etc/openvpn/client" --config "Sweden.ovpn"
