@@ -1,0 +1,10 @@
+Xft*dpi: 96
+Xft*antialias: true
+Xft*rgba: rgb
+Xft*hinting: true
+Xft*hintstyle: hintslight
+URxvt*font: xft:Source Code Pro:size=8:antialias=true:hinting=true, xft:Material Icons:size=10
+URxvt*boldFont: xft:Source Code Pro:size=8:antialias=true:hinting=true
+URxvt*italicFont: xft:Source Code Pro:style=Oblique:size=8:antialias=true:hinting=true
+URxvt*boldItalicFont: xft:Source Code Pro:style=Bold Oblique:size=8:antialias=true:hinting=true
+URxvt.scrollBar: false
