@@ -1,0 +1,4 @@
+zscroll -u true -b "ª x" -d 0.3 -M "mpc status" -m "playing" \
+		"-b ' '" -m "paused" "-b ' ' -s false" "mpc current" &
+
+		wait

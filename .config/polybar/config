@@ -1,0 +1,304 @@
+[colors]
+background = ${xrdb:color0:#222}
+background-alt = ${xrdb:color0:#222}
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
+
+[bar/example]
+monitor = ${env:MONITOR:DVI-D-0}
+width = 75%
+height = 30
+offset-x = 12,5%
+offset-y = 1%
+radius =0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Source Code Pro:pixelsize=8;1
+font-1 = siji:pixelsize=10;1
+font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
+
+modules-left = arch xwindow bspwm
+modules-center = mpdscroll mpd
+modules-right = xkeyboard wireless-network vpn-openvpn-status pulseaudio date powermenu
+
+tray-position = right
+tray-padding = 2
+tray-background = ${xrdb:color1:#222}
+
+wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+label-margin = 0
+type = internal/xwindow
+label = %title:0:30:...%
+format-background = ${xrdb:color1:#222}
+format-foreground = ${xrdb:color0:#222}
+format-padding = 5
+format-margin = 
+label-empty = skndz@polaris
+label-maxlen = 30
+
+[module/arch]
+type = custom/text
+content = 
+;alt-icon = 
+content-margin = 0
+content-padding = 2
+content-background = ${xrdb:color1:#222}
+content-foreground = ${xrdb:color0:#222}
+click-left = $HOME/.config/polybar/scripts/menu
+click-middle = $HOME/.config/polybar/scripts/menu
+click-right = $HOME/.config/polybar/scripts/menu
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+format = <label-layout> <label-indicator>
+format-spacing = 0
+internal = 5
+label-layout =  %layout%
+layout-icon-0 = fi;
+layout-icon-1 = en;
+label-layout-padding = 0
+label-layout-background = ${xrdb:color0:#222}
+label-layout-foreground = ${xrdb:color7:#222}
+
+label-indicator-padding = 2
+; blacklist-0 = num lock
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+format-margin = 2
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+; Workspace icons
+ws-icon-0 = 1
+ws-icon-1 = 2
+ws-icon-2 = 3
+ws-icon-3 = 4
+ws-icon-4 = 5
+ws-icon-5 = 6
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/bspwm]
+type = internal/bspwm
+label-margin = 2
+label-focused = %index%
+label-focused-foreground = ${xrdb:color7:#222}
+label-focused-background = ${xrdb:color0:#222}
+label-focused-underline= ${xrdb:color1:#222}
+label-focused-padding = 2
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${xrdb:color1:#222}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${xrdb:color7:#222}
+label-empty-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/mpdscroll]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/skroll
+tail = true
+label-foreground = ${xrdb:color7:#222}
+format-prefix = 
+format-prefix-foreground = ${xrdb:color1:#222}
+
+[module/mpd]
+type = internal/mpd
+label-foreground = ${xrdb:color7:#222}
+format-online-margin = 2
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>
+format-offline = mpd is offline
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+
+[module/wireless-network]
+type = internal/network
+interface = net1
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+label-disconnected = ?   not connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+animation-packetloss-0 = ?
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = ?
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %d.%m.%Y"
+
+time =  %H:%M
+time-alt = %H:%M
+
+format-prefix = 
+format-prefix-foreground = ${xrdb:color7:#222}
+format-background = ${xrdb:color0:#222}
+format-foreground = ${xrdb:color7:#222}
+format-padding =
+label =  %time% %date%
+label-padding = 1
+format-margin = 2
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+format-margin = 2
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted =  muted
+label-muted-foreground = #666
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${xrdb:color2}
+bar-volume-foreground-1 = ${xrdb:color2}
+bar-volume-foreground-2 = ${xrdb:color2}
+bar-volume-foreground-3 = ${xrdb:color2}
+bar-volume-foreground-4 = ${xrdb:color2}
+bar-volume-foreground-5 = ${xrdb:color3}
+bar-volume-foreground-6 = ${xrdb:color1}
+bar-volume-gradient = false
+bar-volume-indicator = ?
+bar-volume-indicator-font = 1
+bar-volume-fill = ?
+bar-volume-fill-font = 1
+bar-volume-empty = ?
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${xrdb:color0}
+
+[module/powermenu]
+type = custom/menu
+
+format-padding = 3
+format-background = ${xrdb:color1:#222}
+label-open = 
+label-close = Cancel
+format-foreground = ${xrdb:color0:#222}
+label-separator =" / "
+menu-0-0 = " Terminate WM "
+menu-0-0-exec = bspc quit -1
+menu-0-1 = " Reboot "
+menu-0-1-exec = sudo reboot
+menu-0-2 = " Power off "
+menu-0-2-exec = sudo poweroff
+
+[module/vpn-openvpn-status]
+type = custom/script
+exec = ~/.config/scripts/vpn-openvpn-status.sh
+interval = 5
+label-margin = 2
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

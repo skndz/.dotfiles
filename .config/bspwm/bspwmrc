@@ -1,0 +1,62 @@
+#! /bin/sh
+
+sxhkd &
+
+bspc monitor DVI-D-0 -d I II III IV
+bspc monitor DVI-I-1 -d V VI VII
+
+bspc config border_width         4
+bspc config window_gap          14
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config click_to_focus	 true
+bspc config focus_by_distance	 true
+bspc config focus_follows_pointer true
+bspc config history_aware_focus	 true
+
+# source the colors.
+. "${HOME}/.cache/wal/colors.sh"
+
+# Set the border colors.
+bspc config normal_border_color "$color0"
+bspc config active_border_color "$color1"
+bspc config focused_border_color "$color1"
+
+# autostart
+
+# Set wallpaper
+feh --bg-scale /home/skndz/.config/wallpapers/mountains.jpg
+
+# Reload NVIDIA settings
+nvidia-settings --load-config-only
+
+# Generate color scheme
+wal -i /home/skndz/.config/wallpapers/mountains.jpg
+
+# Launch polybar
+$HOME/.config/polybar/launch.sh
+
+# Remove mouse acceleration
+$HOME/.config/scripts/mouseaccel
+
+# Set option to toggle between fi / en keyboards
+. $HOME/.config/bspwm/autostart
+
+# Start compton
+compton --config $HOME/.config/compton.conf &
+
+# Start mopidy
+mopidy &
+
+# Start dunst
+dunst &
+
+
+
+bspc rule --add Firefox desktop='www' follow=on
+bspc rule --add Steam desktop='play' --one-shot follow=on
+bspc rule --add Pavucontrol state=floating
+bspc rule --add feh state=floating
+bspc rule --add Transmission-gtk state=floating

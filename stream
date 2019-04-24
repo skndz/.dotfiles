@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+NAME=${1?Error: no name given}
+streamlink -p vlc twitch.tv/$NAME best &
+sleep 5
+firefox twitch.tv/popout/$NAME/chat?popout= &
+echo "Opening stream $NAME"
+
